@@ -8,7 +8,7 @@ const Header = () => {
   const { data: session } = useSession();
   const user = session?.user;
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <header className="bg-blue-500 py-2 px-2">
@@ -28,20 +28,24 @@ const Header = () => {
             >
               新規作成
             </Link>
-            <Link
-              className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
-              href="/login"
-            >
-              ログイン
-            </Link>
-            <Link
-              className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
-              href="/"
-            >
-              ログアウト
-            </Link>
+            {user ? (
+              <Link
+                className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
+                href="/logout"
+              >
+                ログアウト
+              </Link>
+            ) : (
+              <Link
+                className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
+                href="/login"
+              >
+                ログイン
+              </Link>
+            )}
           </nav>
           <Image
+            className="rounded-full"
             src={user?.image || "/profile_icon_default.png"}
             alt=""
             width={60}
