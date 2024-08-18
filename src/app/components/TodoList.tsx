@@ -24,7 +24,9 @@ const TodoList = async () => {
         >
           <Link href={`/todos/${todo.id}`} className="flex flex-col">
             <div className="flex pb-2 border-b-2">
-              <span className="p-1 bg-blue-100 rounded-md">未着手</span>
+              <span className="p-1 bg-blue-100 rounded-md">
+                {todo.statusName}
+              </span>
               <p className="p-1 ml-3">{todo.title}</p>
             </div>
             <p className="pt-2">{todo.content}</p>

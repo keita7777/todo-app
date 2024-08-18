@@ -3,15 +3,18 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import { getStatusName } from "../utils/getStatusName";
 
 const postBlog = async (
   title: string | undefined,
   content: string | undefined,
+  statusId: string | undefined,
+  statusName: string | undefined,
   userId: string | undefined | null
 ) => {
   const res = await fetch(`http://localhost:3000/api/todo`, {
     method: "POST",
-    body: JSON.stringify({ title, content, userId }),
+    body: JSON.stringify({ title, content, statusId, statusName, userId }),
     headers: {
       "Content-type": "application/json",
     },
@@ -23,6 +26,7 @@ const postBlog = async (
 const page = () => {
   const titleRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
+  const statusRef = useRef<HTMLSelectElement | null>(null);
   const router = useRouter();
 
   const { data: session } = useSession();
@@ -34,6 +38,8 @@ const page = () => {
     await postBlog(
       titleRef.current?.value,
       contentRef.current?.value,
+      statusRef.current?.value,
+      getStatusName(statusRef.current?.value),
       user?.id
     );
 
@@ -47,10 +53,16 @@ const page = () => {
       className="bg-white px-4 py-12 my-10 flex flex-col gap-2 shadow-lg"
     >
       <div className="flex">
-        <select className="border p-2 mr-2 rounded-md">
-          <option value="notstarted">未着手</option>
-          <option value="progress">進行中</option>
-          <option value="done">完了</option>
+        <select ref={statusRef} className="border p-2 mr-2 rounded-md">
+          <option value="notstarted" label="未着手">
+            未着手
+          </option>
+          <option value="progress" label="進行中">
+            進行中
+          </option>
+          <option value="done" label="完了">
+            完了
+          </option>
         </select>
         <input
           ref={titleRef}

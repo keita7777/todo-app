@@ -25,7 +25,7 @@ export const GET = async (req: Request, res: NextResponse) => {
 //ブログの投稿API
 export const POST = async (req: Request, res: NextResponse) => {
   try {
-    const { title, content, userId } = await req.json();
+    const { title, content, userId, statusId, statusName } = await req.json();
 
     await main();
     const post = await prisma.todo.create({
@@ -33,6 +33,8 @@ export const POST = async (req: Request, res: NextResponse) => {
         title,
         content,
         userId,
+        statusId,
+        statusName,
       },
     });
     return NextResponse.json({ message: "Success", post }, { status: 201 });

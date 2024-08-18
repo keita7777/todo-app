@@ -58,12 +58,14 @@ model User {
 }
 
 model Todo {
-  id        String   @id @default(cuid())
-  userId    String
-  title     String
-  content   String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String   @id @default(cuid())
+  userId     String
+  title      String
+  content    String
+  statusId   String
+  statusName String
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {

@@ -8,21 +8,21 @@ const getBlogById = async (id: string) => {
   });
   const data = await res.json();
 
+  console.log(`APIの${id}`);
+
   return data.todo;
 };
 
 const page = async ({ params }: { params: { id: string } }) => {
   const todo = await getBlogById(params.id);
+  console.log(`paramsの${params.id}`);
+  console.log(`取得した${todo.id}`);
 
   return (
     <>
       <div className="flex flex-col bg-white pt-5 pb-2 px-4 my-4 shadow-lg">
         <div className="flex items-center border-b-2 pb-2">
-          <select className="border p-2 rounded-md">
-            <option value="notstarted">未着手</option>
-            <option value="progress">進行中</option>
-            <option value="done">完了</option>
-          </select>
+          <span className="p-1 bg-blue-100 rounded-md">{todo.statusName}</span>
           <p className="ml-3">{todo.title}</p>
         </div>
         <p className="mt-2">{todo.content}</p>
