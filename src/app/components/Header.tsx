@@ -22,19 +22,22 @@ const Header = () => {
             >
               一覧
             </Link>
-            <Link
-              className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
-              href="/createTodo"
-            >
-              新規作成
-            </Link>
+
             {user ? (
-              <Link
-                className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
-                href="/logout"
-              >
-                ログアウト
-              </Link>
+              <>
+                <Link
+                  className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
+                  href="/createTodo"
+                >
+                  新規作成
+                </Link>
+                <Link
+                  className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
+                  href="/logout"
+                >
+                  ログアウト
+                </Link>
+              </>
             ) : (
               <Link
                 className="p-2 rounded-2xl transition-all duration-100 ease-linear hover:bg-white hover:text-blue-500"
