@@ -32,3 +32,21 @@ export const DELETE = async (req: Request, res: NextResponse) => {
     await prisma.$disconnect();
   }
 };
+
+export const PUT = async (req: Request, res: NextResponse) => {
+  try {
+    const id: string = req.url.split("/todo/")[1];
+
+    const { title, content } = await req.json();
+    await main();
+    const todo = await prisma.todo.update({
+      data: { title, content },
+      where: { id },
+    });
+    return NextResponse.json({ message: "Success", todo }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "Error" }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
+  }
+};

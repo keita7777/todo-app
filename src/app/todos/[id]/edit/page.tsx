@@ -1,18 +1,83 @@
-import React from "react";
+"use client";
 
-const page = () => {
+import { useRouter } from "next/navigation";
+import React, { useEffect, useRef } from "react";
+
+const getBlogById = async (id: string) => {
+  const res = await fetch(`http://localhost:3000/api/todo/${id}`, {
+    method: "GET",
+  });
+  const data = await res.json();
+
+  return data.todo;
+};
+
+const editBlog = async (
+  title: string | undefined,
+  content: string | undefined,
+  id: string
+) => {
+  const res = await fetch(`http://localhost:3000/api/todo/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ title, content, id }),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+
+  return res.json();
+};
+
+const page = ({ params }: { params: { id: string } }) => {
+  const router = useRouter();
+  const titleRef = useRef<HTMLInputElement | null>(null);
+  const contentRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const handleUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    await editBlog(
+      titleRef.current?.value,
+      contentRef.current?.value,
+      params.id
+    );
+
+    router.push("/todos");
+    router.refresh();
+  };
+
+  useEffect(() => {
+    getBlogById(params.id)
+      .then((data) => {
+        if (titleRef.current && contentRef.current) {
+          titleRef.current.value = data.title;
+          contentRef.current.value = data.content;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <form className="bg-white px-4 py-12 my-10 flex flex-col gap-2 shadow-lg">
+    <form
+      onSubmit={handleUpdate}
+      className="bg-white px-4 py-12 my-10 flex flex-col gap-2 shadow-lg"
+    >
       <div className="flex">
         <select className="border p-2 mr-2 rounded-md">
           <option value="notstarted">未着手</option>
           <option value="progress">進行中</option>
           <option value="done">完了</option>
         </select>
-        <input type="text" className="flex-1 border p-2 outline-none" />
+        <input
+          ref={titleRef}
+          type="text"
+          className="flex-1 border p-2 outline-none"
+        />
       </div>
 
-      <textarea className="border p-2 outline-none" />
+      <textarea ref={contentRef} className="border p-2 outline-none" />
       <button className="bg-blue-500 text-slate-50 p-2 hover:bg-blue-300 hover:text-gray-900 transition-all duration-100">
         更新
       </button>
