@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
-import { main } from "../route";
 import prisma from "@/app/lib/prisma";
+
+async function main() {
+  try {
+    await prisma.$connect();
+  } catch (error) {
+    throw new Error("DB接続に失敗しました");
+  }
+}
 
 export const GET = async (req: Request, res: NextResponse) => {
   try {

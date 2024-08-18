@@ -1,7 +1,7 @@
 import prisma from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function main() {
+async function main() {
   try {
     await prisma.$connect();
   } catch (error) {
