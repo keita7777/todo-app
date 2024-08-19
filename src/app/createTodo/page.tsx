@@ -20,6 +20,17 @@ const postBlog = async (
     },
   });
 
+  if (!res.ok) {
+    throw new Error("サーバーエラー");
+  }
+
+  try {
+    const data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.error("JSONのパースに失敗しました:", error);
+  }
+
   return res.json();
 };
 

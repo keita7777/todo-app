@@ -12,7 +12,17 @@ const getBlogById = async (id: string) => {
   );
   const data = await res.json();
 
-  return data.todo;
+  if (!res.ok) {
+    throw new Error("サーバーエラー");
+  }
+
+  try {
+    const data = await res.json();
+    console.log(data);
+    return data.todo;
+  } catch (error) {
+    console.error("JSONのパースに失敗しました:", error);
+  }
 };
 
 const page = async ({ params }: { params: { id: string } }) => {
