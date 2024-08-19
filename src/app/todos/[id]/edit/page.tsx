@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 
 const getBlogById = async (id: string) => {
-  const res = await fetch(`http://localhost:3000/api/todo/${id}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/todo/${id}`,
+    {
+      method: "GET",
+    }
+  );
   const data = await res.json();
 
   return data.todo;
@@ -20,13 +23,16 @@ const editBlog = async (
   statusName: string | undefined,
   id: string
 ) => {
-  const res = await fetch(`http://localhost:3000/api/todo/${id}`, {
-    method: "PUT",
-    body: JSON.stringify({ title, content, statusId, statusName, id }),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/todo/${id}`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ title, content, statusId, statusName, id }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
 
   return res.json();
 };

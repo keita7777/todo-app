@@ -8,12 +8,15 @@ type DeleteButtonProps = {
 };
 
 const deleteTodo = async (id: string) => {
-  const res = await fetch(`http://localhost:3000/api/todo/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/todo/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
 
   const data = await res.json();
 

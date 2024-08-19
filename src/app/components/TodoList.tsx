@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 async function fetchAllTodos() {
-  const res = await fetch(`http://localhost:3000/api/todo`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/todo`, {
     cache: "no-cache",
   });
 
