@@ -6,20 +6,19 @@ const getBlogById = async (id: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/todo/${id}`,
     {
+      cache: "no-cache",
       method: "GET",
     }
   );
   const data = await res.json();
-
-  console.log(`APIの${id}`);
 
   return data.todo;
 };
 
 const page = async ({ params }: { params: { id: string } }) => {
   const todo = await getBlogById(params.id);
-  console.log(`paramsの${params.id}`);
-  console.log(`取得した${todo.id}`);
+
+  console.log(todo);
 
   return (
     <>

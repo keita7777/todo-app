@@ -67,9 +67,7 @@ const Page = ({ params }: { params: { id: string } }) => {
           statusRef.current.value = data.statusId;
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   return (

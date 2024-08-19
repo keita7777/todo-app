@@ -17,7 +17,7 @@ const TodoList = async () => {
 
   return (
     <ul className="pb-2">
-      {todos.map((todo: Todo) => (
+      {todos?.map((todo: Todo) => (
         <li
           key={todo.id}
           className="flex flex-col bg-white p-4 mb-4 shadow-lg hover:shadow-none hover:translate-y-1 transition-all duration-100"
@@ -30,6 +30,9 @@ const TodoList = async () => {
               <p className="p-1 ml-3">{todo.title}</p>
             </div>
             <p className="pt-2">{todo.content}</p>
+            <small className="text-end pt-2">
+              最終更新日時：{new Date(todo.createdAt).toLocaleString()}
+            </small>
           </Link>
         </li>
       ))}
