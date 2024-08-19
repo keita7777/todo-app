@@ -16,7 +16,7 @@ const getBlogById = async (id: string) => {
   // return data.todo;
 
   if (!res.ok) {
-    throw new Error("サーバーエラー");
+    throw new Error("サーバーエラーedit");
   }
 
   try {

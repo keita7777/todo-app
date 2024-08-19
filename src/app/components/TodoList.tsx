@@ -9,7 +9,7 @@ async function fetchAllTodos() {
   });
 
   if (!res.ok) {
-    throw new Error("サーバーエラー");
+    throw new Error("サーバーエラー一覧");
   }
 
   try {

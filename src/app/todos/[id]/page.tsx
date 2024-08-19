@@ -13,7 +13,7 @@ const getBlogById = async (id: string) => {
   // const data = await res.json();
 
   if (!res.ok) {
-    throw new Error("サーバーエラー");
+    throw new Error("サーバーエラー詳細");
   }
 
   try {
