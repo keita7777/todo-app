@@ -3,10 +3,17 @@ import Link from "next/link";
 import React from "react";
 
 async function fetchAllTodos() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/todo`, {
-    cache: "no-cache",
-    method: "GET",
-  });
+  // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/todo`, {
+  //   cache: "no-cache",
+  //   method: "GET",
+  // });
+  const res = await fetch(
+    `https://todo-app-seven-flame-99.vercel.app/api/todo`,
+    {
+      cache: "no-cache",
+      method: "GET",
+    }
+  );
 
   if (!res.ok) {
     throw new Error("サーバーエラー一覧");
