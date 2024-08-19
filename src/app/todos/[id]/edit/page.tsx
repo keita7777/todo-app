@@ -11,9 +11,21 @@ const getBlogById = async (id: string) => {
       method: "GET",
     }
   );
-  const data = await res.json();
+  // const data = await res.json();
 
-  return data.todo;
+  // return data.todo;
+
+  if (!res.ok) {
+    throw new Error("サーバーエラー");
+  }
+
+  try {
+    const data = await res.json();
+    console.log(data);
+    return data.todo;
+  } catch (error) {
+    console.error("JSONのパースに失敗しました:", error);
+  }
 };
 
 const editBlog = async (

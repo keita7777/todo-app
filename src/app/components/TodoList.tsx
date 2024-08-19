@@ -5,11 +5,20 @@ import React from "react";
 async function fetchAllTodos() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/todo`, {
     cache: "no-cache",
+    method: "GET",
   });
 
-  const data = await res.json();
+  if (!res.ok) {
+    throw new Error("サーバーエラー");
+  }
 
-  return data.todos;
+  try {
+    const data = await res.json();
+    console.log(data);
+    return data.todos;
+  } catch (error) {
+    console.error("JSONのパースに失敗しました:", error);
+  }
 }
 
 const TodoList = async () => {
