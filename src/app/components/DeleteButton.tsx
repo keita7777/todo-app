@@ -13,7 +13,7 @@ const deleteTodo = async (id: string) => {
     {
       method: "DELETE",
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
       },
     }
   );

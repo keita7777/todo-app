@@ -29,7 +29,7 @@ const editBlog = async (
       method: "PUT",
       body: JSON.stringify({ title, content, statusId, statusName, id }),
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
       },
     }
   );

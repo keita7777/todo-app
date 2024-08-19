@@ -16,7 +16,7 @@ const postBlog = async (
     method: "POST",
     body: JSON.stringify({ title, content, statusId, statusName, userId }),
     headers: {
-      "Content-type": "application/json",
+      "Content-Type": "application/json",
     },
   });
 
